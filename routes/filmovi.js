@@ -5,12 +5,12 @@ const router = express.Router()
 //Stranica za CRUD filmova
 router.get('/crud', async (req,res)=>{
     const filmovi = await Film.find().sort({datumIzlaska: 'desc'})
-    res.render('filmoviManage', {filmovi:filmovi})
+    res.render('filmovi/filmoviManage', {filmovi:filmovi})
 })
 
 //Stranica za dodavanje filmova
 router.get('/novi',(req,res)=>{
-    res.render('filmoviDodaj', {film: new Film()})
+    res.render('filmovi/filmoviDodaj', {film: new Film()})
 })
 
 //Dodavanje novog filma
@@ -27,6 +27,11 @@ router.post('/novi', async (req, res)=>{
         najava: req.body.najava
     })
     await film.save()
+    res.redirect('/filmovi/crud')
+})
+
+router.delete('/crud/:id', async (req, res) => {
+    await Film.findByIdAndDelete(req.params.id)
     res.redirect('/filmovi/crud')
 })
 module.exports = router
