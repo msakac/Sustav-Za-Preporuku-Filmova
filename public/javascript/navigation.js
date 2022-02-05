@@ -53,6 +53,9 @@ $(document).ready(function($){
 	if ( path == 'bezvezni' ) {
 		path = '/korisnik/bezvezni';
 	}
+	if ( path == 'crud' || path == 'novi' ) {
+		path = '/filmovi/crud';
+	}
 
 	var target = $('#navbarSupportedContent ul li a[href="'+path+'"]');
 	// Add active class to target link
