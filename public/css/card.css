@@ -120,6 +120,13 @@
 }
  .postcard:hover .postcard__bar {
 	 width: 100px;
+} 
+.gumb{
+ border: 0;
+ background: none;
+ box-shadow: none;
+ border-radius: 0px;
+ color: #e1e5ea;
 }
  @media screen and (min-width: 769px) {
 	 .postcard {
