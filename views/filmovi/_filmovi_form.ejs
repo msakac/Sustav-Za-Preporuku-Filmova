@@ -8,11 +8,11 @@
 </div>
 <div class="form-group">
     <label for="datum" class="float-left font-weight-bold h5">Datum izlaska</label>
-    <input type="date" required name="datum" id="datum" class="form-control"><%=film.datumIzlaska%></input>
+    <input type="date" required name="datum" id="datum" class="form-control" value="<%=film.datumIzlaska.toISOString().slice(0, 10)%>"></input>
 </div>
 <div class="form-group">
-    <label for="zanr" class="float-left font-weight-bold h5">Žanr</label>
-    <input value="<%=film.zanr%>" type="text" name="zanr" id="zanr" class="form-control">
+    <label for="trajanje" class="float-left font-weight-bold h5">Trajanje filma</label>
+    <input required value="<%=film.trajanje%>" type="text" name="trajanje" id="trajanje" class="form-control">
 </div>
 <div class="form-group">
     <label for="reziser" class="float-left font-weight-bold h5">Režiser</label>
