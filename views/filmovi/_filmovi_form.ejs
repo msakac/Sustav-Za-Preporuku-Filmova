@@ -1,0 +1,35 @@
+<div class="form-group">
+    <label for="naziv" class="float-left font-weight-bold h5">Naziv</label>
+    <input required value="<%=film.naziv%>" type="text" name="naziv" id="naziv" class="form-control">
+</div>
+<div class="form-group">
+    <label for="opis" class="float-left font-weight-bold h5">Opis</label>
+    <textarea name="opis" id="opis" class="form-control"><%=film.opis%></textarea>
+</div>
+<div class="form-group">
+    <label for="datum" class="float-left font-weight-bold h5">Datum izlaska</label>
+    <input type="date" required name="datum" id="datum" class="form-control"><%=film.datumIzlaska%></input>
+</div>
+<div class="form-group">
+    <label for="zanr" class="float-left font-weight-bold h5">Žanr</label>
+    <input value="<%=film.zanr%>" type="text" name="zanr" id="zanr" class="form-control">
+</div>
+<div class="form-group">
+    <label for="reziser" class="float-left font-weight-bold h5">Režiser</label>
+    <input required value="<%=film.reziser%>" type="text" name="reziser" id="reziser" class="form-control">
+</div>
+<div class="form-group">
+    <label for="glumci" class="float-left font-weight-bold h5">Glumci</label>
+    <textarea name="glumci" id="glumci" class="form-control"><%=film.glumci%></textarea>
+</div>
+<div class="form-group">
+    <label for="slika"  class="float-left font-weight-bold h5">Slika</label>
+    <input value="<%=film.slika%>" type="text" name="slika" id="slika" class="form-control">
+</div>
+<div class="form-group">
+    <label for="najava" class="float-left font-weight-bold h5">Najava</label>
+    <input value="<%=film.najava%>" type="text" name="najava" id="najava" class="form-control">
+</div>
+<a href="/filmovi/crud" class="btn btn-secondary">Odustani</a>
+<button type="submit" class="btn btn-success" style="float: right;">Spremi</button>
+
