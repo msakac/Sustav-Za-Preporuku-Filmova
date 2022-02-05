@@ -21,6 +21,10 @@ router.get('/login', (req,res)=>{
     
 })
 
+router.get('/bezvezni',(req, res)=>{
+    res.render('bezvezni')
+})
+
 //Registracija
 router.post('/registracija', async (req, res) => {
     const postojiKorIme = await Korisnik.find({ korisnickoIme: req.body.korisnickoIme })
