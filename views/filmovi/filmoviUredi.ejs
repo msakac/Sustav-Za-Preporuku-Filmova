@@ -22,8 +22,8 @@
     <%- include('../_navigacija') %>
     <section class="dark">
       <div class="container py-4 w-50">
-        <h1 class="h1 text-center" id="pageHeaderTitle">DODAJ FILM</h1>
-          <form action ="/filmovi/novi" method="POST">
+        <h1 class="h1 text-center" id="pageHeaderTitle">UREDI FILM</h1>
+          <form action ="/filmovi/uredi/<%=film.id%>?_method=PUT" method="POST">
             <%- include('_filmovi_form') %>
           </form>
     </div>
