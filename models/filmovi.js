@@ -20,6 +20,9 @@ const filmoviSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    trajanje: {
+        type: String,
+    },
     glumci: {
         type: String,
         required: true,
