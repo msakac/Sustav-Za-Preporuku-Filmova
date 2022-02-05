@@ -13,6 +13,7 @@ router.get('/dodaj', (req, res) => {
     res.render('kategorije/kategorijeDodaj', { kategorija: new Kategorija() })
 })
 
+//Stranica za uredivanje kategorije
 router.get('/uredi/:id', async (req, res) => {
     const kategorija = await Kategorija.findById(req.params.id)
     res.render('kategorije/kategorijeUredi', { kategorija: kategorija })
@@ -29,6 +30,7 @@ router.post('/dodaj', async (req, res) => {
     res.redirect('/kategorije')
 })
 
+//Uredivanje kategorije
 router.put('/uredi/:id', async (req, res) => {
     await Kategorija.findById(req.params.id)
         .then((model) => {
