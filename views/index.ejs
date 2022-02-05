@@ -12,12 +12,41 @@
     />
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/css/navigation.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/navigation.css" type="text/css" />
+    <link rel="stylesheet" href="/css/card.css" type="text/css" />
     <script src="/javascript/navigation.js"></script>
     <title>Filmovi</title>
   </head>
   <body>
     <%- include('_navigacija') %>
-    <h1>Filmovi</h1>
+    <section class="dark">
+      <div class="container py-4">
+        <h1 class="h1 text-center" id="pageHeaderTitle">FILMOVI</h1>
+        
+      <% filmovi.forEach(film=> { %>
+        <article class="postcard dark blue">
+          <a class="postcard__img_link" href="#">
+            <img class="postcard__img" src=<%= film.slika %> alt="Image Title" />
+          </a>
+          <div class="postcard__text">
+            <h1 class="postcard__title blue"><a href="#"><%= film.naziv %></a></h1>
+            <div class="postcard__subtitle small">
+              <time datetime="2020-05-25 12:00:00">
+                <i class="fas fa-calendar-alt mr-2"></i><%= film.datumIzlaska.toLocaleDateString() %>
+              </time>
+            </div>
+            <div class="postcard__bar"></div>
+            <div class="postcard__preview-txt"><%=film.opis%></div>
+            <ul class="postcard__tagbox">
+              <li class="tag__item"><i class="fas fa-tag mr-2"></i><%= film.kategorija%></li>
+              <li class="tag__item"><i class="fas fa-clock mr-2"></i><%= film.trajanje +" min"%></li>
+              <li class="tag__item play blue">
+                <a href="#"><i class="fas fa-play mr-2"></i>Više</a>
+              </li>
+          </div>
+        </article>
+        <%})%>
+    </div>
+    </section>
   </body>
 </html>
