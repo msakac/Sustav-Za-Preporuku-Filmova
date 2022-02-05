@@ -44,19 +44,19 @@ $(".navbar-toggler").click(function(){
 // --------------add active class-on another-page move----------
 $(document).ready(function($){
 	// Get current path and find target link
-	var path = window.location.pathname.split("/").pop();
+	var path = window.location.pathname;
     console.log(path)
 	// Account for home page with empty path
-    if(path == ''){
+    if(path == '/'){
         path='/'
     }
 	if ( path == 'bezvezni' ) {
 		path = '/korisnik/bezvezni';
 	}
-	if ( path == 'crud' || path == 'novi' ) {
+	if ( path == '/filmovi/crud' || path == '/filmovi/novi' || path.match('/filmovi/uredi/') ) {
 		path = '/filmovi/crud';
 	}
-	if(path == 'kategorije' || path== 'dodaj'){
+	if(path == '/kategorije' || path== '/kategorije/dodaj' || path.match('/kategorije/uredi/')){
 		path = '/kategorije'
 	}
 
