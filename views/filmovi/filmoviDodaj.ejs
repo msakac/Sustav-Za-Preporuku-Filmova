@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/navigation.css" type="text/css"/>
+    <script src="/javascript/navigation.js"></script>
+    <link rel="stylesheet" href="/css/login.css" type="text/css" />
+    <link rel="stylesheet" href="/css/card.css" type="text/css" />
+    <title>Filmovi</title>
+  </head>
+  <body>
+    <%- include('../_navigacija') %>
+    <section class="dark">
+      <div class="container py-4 w-50">
+        <h1 class="h1 text-center" id="pageHeaderTitle">DODAJ FILM</h1>
+          <form action ="/filmovi/novi" method="POST">
+            <%- include('_filmovi_form') %>
+          </form>
+    </div>
+    </section>
+  </body>
+</html>
