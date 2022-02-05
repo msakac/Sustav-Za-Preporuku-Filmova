@@ -1,0 +1,11 @@
+<div class="form-group">
+    <label for="naziv" class="float-left font-weight-bold h5">Naziv</label>
+    <input required value="<%=kategorija.naziv%>" type="text" name="naziv" id="naziv" class="form-control">
+</div>
+<div class="form-group">
+    <label for="opis" class="float-left font-weight-bold h5">Opis</label>
+    <textarea name="opis" id="opis" class="form-control"><%=kategorija.opis%></textarea>
+</div>
+<a href="/filmovi/crud" class="btn btn-secondary">Odustani</a>
+<button type="submit" class="btn btn-success" style="float: right;">Spremi</button>
+
