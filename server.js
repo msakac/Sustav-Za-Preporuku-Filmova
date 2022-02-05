@@ -30,7 +30,8 @@ app.use('/kategorije', kategorijeRouter)
 app.get('/', async (req, res)=>{
     console.log(req.session.result)
     if(req.session.result){
-        res.render('index')
+        const filmovi = await Filmovi.find().sort({ datumIzlaska: 'desc' })
+        res.render('index', {filmovi:filmovi})
     }else{
         res.redirect('/korisnik/login')
     }
