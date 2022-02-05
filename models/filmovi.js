@@ -13,9 +13,6 @@ const filmoviSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    zanr: {
-        type: String,
-    },
     reziser: {
         type: String,
         required: true
