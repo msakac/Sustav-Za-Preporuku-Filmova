@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/registracija.css" type="text/css" />
+    <title>Registracija</title>
+  </head>
+
+  <body>
+    <div id="login">
+      <h3 class="text-center text-white pt-5">Registriraj se</h3>
+      <div class="container">
+        <div
+          id="login-row"
+          class="row justify-content-center align-items-center"
+        >
+          <div id="login-column" class="col-md-6">
+            <div id="login-box" class="col-md-12">
+              <form
+                id="login-form"
+                class="form"
+                action="/korisnik/registracija"
+                method="POST"
+              >
+                <h3 class="text-center text-info">Registracija</h3>
+                <div class="form-group">
+                  <label for="korisnickoIme" class="text-info">Korisničko ime:</label
+                  ><br />
+                  <input
+                    required
+                    type="text"
+                    name="korisnickoIme"
+                    id="korisnickoIme"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="ime" class="text-info">Ime:</label><br/>
+                  <input
+                    required
+                    type="text"
+                    name="ime"
+                    id="ime"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="prezime" class="text-info">Prezime:</label><br />
+                  <input
+                    required
+                    type="text"
+                    name="prezime"
+                    id="prezime"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email" class="text-info">Email:</label><br />
+                  <input
+                    required
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="lozinka" class="text-info">Lozinka:</label><br />
+                  <input
+                    required
+                    type="password"
+                    name="lozinka"
+                    id="lozinka"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <div class="text-center">
+                    <input
+                      type="submit"
+                      name="submit"
+                      class="btn btn-success"
+                      value="Registriraj se"
+                    />
+                    <a href="/korisnik/login" class="btn btn-secondary">Prijava</a>
+                    <p class="text-danger"><%=errorPoruka%></p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
