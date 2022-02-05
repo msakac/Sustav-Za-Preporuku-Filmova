@@ -3,8 +3,9 @@ const Film = require('./../models/filmovi')
 const router = express.Router()
 
 //Stranica za CRUD filmova
-router.get('/crud', (req,res)=>{
-    res.render('filmoviManage')
+router.get('/crud', async (req,res)=>{
+    const filmovi = await Film.find().sort({datumIzlaska: 'desc'})
+    res.render('filmoviManage', {filmovi:filmovi})
 })
 
 //Stranica za dodavanje filmova
@@ -26,6 +27,6 @@ router.post('/novi', async (req, res)=>{
         najava: req.body.najava
     })
     await film.save()
-    res.render('filmoviManage')
+    res.redirect('/filmovi/crud')
 })
 module.exports = router
