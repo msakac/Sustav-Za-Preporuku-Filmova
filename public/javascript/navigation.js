@@ -56,6 +56,9 @@ $(document).ready(function($){
 	if ( path == 'crud' || path == 'novi' ) {
 		path = '/filmovi/crud';
 	}
+	if(path == 'kategorije' || path== 'dodaj'){
+		path = '/kategorije'
+	}
 
 	var target = $('#navbarSupportedContent ul li a[href="'+path+'"]');
 	// Add active class to target link
