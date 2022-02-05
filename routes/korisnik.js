@@ -21,6 +21,11 @@ router.get('/login', (req,res)=>{
     
 })
 
+router.get('/odjava',(req,res)=>{
+    req.session.destroy()
+    res.redirect('/')
+})
+
 router.get('/bezvezni',(req, res)=>{
     res.render('bezvezni')
 })
