@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/navigation.css" type="text/css" />
+    <link rel="stylesheet" href="/css/card.css" type="text/css" />
+    <script src="/javascript/navigation.js"></script>
+    <title>Filmovi</title>
+  </head>
+  <body>
+    <%- include('../_navigacija') %>
+    <section class="dark">
+      <div class="container py-4">
+        <a href="/filmovi/novi" class="btn btn-success" style="float: right;">Novi film</a>
+        <h1 class="h1 text-center" id="pageHeaderTitle">FILMOVI</h1>
+        
+      <% filmovi.forEach(film=> { %>
+        <article class="postcard dark blue">
+          <a class="postcard__img_link" href="#">
+            <img class="postcard__img" src=<%= film.slika %> alt="Image Title" />
+          </a>
+          <div class="postcard__text">
+            <h1 class="postcard__title blue"><a href="#"><%= film.naziv %></a></h1>
+            <div class="postcard__subtitle small">
+              <time datetime="2020-05-25 12:00:00">
+                <i class="fas fa-calendar-alt mr-2"></i><%= film.datumIzlaska.toLocaleDateString() %>
+              </time>
+            </div>
+            <div class="postcard__bar"></div>
+            <div class="postcard__preview-txt"><%=film.opis%></div>
+            <ul class="postcard__tagbox">
+              <li class="tag__item"><i class="fas fa-tag mr-2"></i><%= film.kategorija%></li>
+              <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+              <li class="tag__item play blue">
+                <a href="#"><i class="fas fa-play mr-2"></i>Više</a>
+              </li>
+            </ul>
+            <ul class="postcard__tagbox">
+              <li class="tag__item play blue">
+                <a href="#"><i class="fas fa-play mr-2"></i>Uredi</a>
+              </li>
+              <li class="tag__item play blue">
+                <form action="/filmovi/crud/<%=film.id%>?_method=DELETE" method="POST">
+                  <button type="submit" class="fas fa-play mr-2 gumb">Izbriši</button>
+              </form>
+              </li>
+            </ul>
+          </div>
+        </article>
+        <%})%>
+    </div>
+    </section>
+  </body>
+</html>
