@@ -51,8 +51,8 @@ router.get('/uredi/:id', async (req, res) => {
 //Stranica za preporuke
 router.get('/preporuceno', async(req,res)=>{
     if(req.session.result){
-        algoritamZaPreporuke(req)
-        res.render('filmovi/preporuceni')
+        filmoviSaFaktorom = await algoritamZaPreporuke(req)
+        res.render('filmovi/preporuceni',{filmovi: Array.from(filmoviSaFaktorom)})
     }else{
         res.redirect('/')
     }
@@ -169,25 +169,64 @@ async function algoritamZaPreporuke(req){
 
     //getanje svih kategorija
     const sveKategorije = await Kategorija.find()
-
+    var kategorijeSaFaktorom = []
     //Zbrajanje ocjena svake kategorije i brojanje koliko je ta kategorija dobila ocjeni
     for(var i in sveKategorije){
         id = sveKategorije[i].id //id kategorije
 
         var ocjeneZaKategoriju = listaOcjenaPoKategoriji.filter(i=>i.id == id)//broj ocjena
         var brojOcjenaZaKategoriju = ocjeneZaKategoriju.length//broj ocjena
-
         var sumaOcjena = listaOcjenaPoKategoriji.filter(i=>i.id == id).reduce((a,b)=> a + b.ocjena,0);//suma ocjena
-
         var prosjecnaOcjena = (sumaOcjena/5).toFixed(2)
         var faktorPreporuke = (prosjecnaOcjena * sumaOcjena).toFixed(2)
         
-        console.log(sveKategorije[i].naziv)
-        console.log("--------Broj ocjena: "+brojOcjenaZaKategoriju)
-        console.log("--------Suma ocjena: "+sumaOcjena)
-        console.log("--------Prosjecna ocjena: "+prosjecnaOcjena)
-        console.log("--------Faktor preporuke: "+faktorPreporuke)
+        // console.log(sveKategorije[i].naziv)
+        // console.log("--------Broj ocjena: "+brojOcjenaZaKategoriju)
+        // console.log("--------Suma ocjena: "+sumaOcjena)
+        // console.log("--------Prosjecna ocjena: "+prosjecnaOcjena)
+        // console.log("--------Faktor preporuke: "+faktorPreporuke)
+
+        //dodavanje novog atributa kategoriji
+        var rKategorija = sveKategorije[i].toObject()
+        rKategorija.id = sveKategorije[i].id
+        rKategorija.faktor = faktorPreporuke
+        kategorijeSaFaktorom.push(rKategorija)
     }
+    //console.log(kategorijeSaFaktorom)
+
+    //Dodavanje zbrojene sume faktora svakom filmu
+    var filmoviZaStranicu = []
+    const filmovi = await Film.find()
+    for(var i in filmovi){
+        var kategorijeFilma = await FilmKategorije.find({film: filmovi[i].id})
+        var faktorZaFilm = 0
+        for(var j in kategorijeFilma){
+            var kategorijaFilma = kategorijeSaFaktorom.find(i=>i.id == kategorijeFilma[j].kategorija)
+            faktorZaFilm = +faktorZaFilm + +kategorijaFilma.faktor
+        }
+        console.log(filmovi[i].naziv+" Faktor: "+faktorZaFilm)
+        //objektu dodajem atribut faktora i dodajem v novu listu
+        var idFilma = filmovi[i].id
+        var rFilm = filmovi[i].toObject()
+        rFilm.faktor = faktorZaFilm
+        rFilm.id = idFilma
+        filmoviZaStranicu.push(rFilm)
+    }
+    //sortiranje
+    function compare( a, b ) {
+        if ( a.faktor < b.faktor ){
+          return 1;
+        }
+        if ( a.faktor > b.faktor ){
+          return -1;
+        }
+        return 0;
+      }
+      filmoviZaStranicu.sort( compare );
+      //console.log(filmoviZaStranicu)
+
+    return filmoviZaStranicu
 }
+
 
 module.exports = router

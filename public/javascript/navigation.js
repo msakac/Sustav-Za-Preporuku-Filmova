@@ -53,7 +53,10 @@ $(document).ready(function($){
 	if ( path == 'bezvezni' ) {
 		path = '/korisnik/bezvezni';
 	}
-	if ( path == '/filmovi/crud' || path == '/filmovi/novi' || path.match('/filmovi/uredi/') || path.match('/film-kategorije/') || path.match('/filmovi/')) {
+	if(path == '/filmovi/preporuceno'){
+		path = '/filmovi/preporuceno'
+	}
+	if ((path == '/filmovi/crud' || path == '/filmovi/novi' || path.match('/filmovi/uredi/') || path.match('/film-kategorije/') || path.match('/filmovi/')) && path !='/filmovi/preporuceno') {
 		path = '/filmovi/crud';
 	}
 	if(path == '/kategorije' || path== '/kategorije/dodaj' || path.match('/kategorije/uredi/')){
