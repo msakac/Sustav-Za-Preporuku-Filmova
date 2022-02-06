@@ -13,6 +13,7 @@ router.get('/crud', async (req, res) => {
     res.render('filmovi/filmoviManage', { filmovi: Array.from(filmoviZaStranicu)})
 })
 
+//Stranica za prikaz detalja filma
 router.get('/detalji/:id', async(req,res)=>{
     var filmZaDetalje = []
 
