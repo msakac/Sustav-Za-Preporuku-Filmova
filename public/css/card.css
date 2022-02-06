@@ -7,6 +7,11 @@
 	 text-rendering: optimizeLegibility;
 	 font-weight: initial;
 }
+select{
+	text-align:center; 
+	display: block; 
+	margin: 0 auto;
+}
  .dark {
 	 background: #110f16;
 }
