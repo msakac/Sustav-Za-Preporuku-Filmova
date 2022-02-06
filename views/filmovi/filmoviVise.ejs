@@ -33,9 +33,11 @@
               </time>
               <i class="fas fa-calendar-alt mr-5"></i>Režiser: <%= film.reziser %>
             </div>
+            <% if(film.najava.match("<iframe")){ %>
               <div class="col-sm-8 offset-md-2 embed-responsive embed-responsive-16by9">
                 <%- film.najava %>>
             </div>
+            <% } %>
             <div class="postcard__subtitle small">
                 <br>
                 <i class="fas fa-calendar-alt mr-3" style="color:white"></i>Glumci: <%= film.glumci %>
