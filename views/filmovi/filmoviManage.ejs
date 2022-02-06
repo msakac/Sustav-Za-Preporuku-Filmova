@@ -39,7 +39,9 @@
             <div class="postcard__bar ml-3"></div>
             <div class="postcard__preview-txt ml-3"><%=film.opis%></div>
             <ul class="postcard__tagbox ml-3">
-              <li class="tag__item"><i class="fas fa-tag mr-2"></i><%= film.kategorija%></li>
+              <% film.kategorije.forEach(kategorija=> { %>
+                <li class="tag__item"><i class="fas fa-tag mr-2"></i><%= kategorija%></li>
+              <%})%>
               <li class="tag__item"><i class="fas fa-clock mr-2"></i><%= film.trajanje +" min"%></li>
               <li class="tag__item play blue">
                 <a href="#"><i class="fas fa-play mr-2"></i>Više</a>
@@ -47,7 +49,7 @@
             </ul>
             <ul class="postcard__tagbox ml-3">
               <a href="/filmovi/uredi/<%=film.id%>" class="btn btn-info">Uredi film</a>
-              <a href="/filmovi/uredi/<%=film.id%>" class="btn btn-secondary ml-3">Uredi kategorije</a>
+              <a href="/film-kategorije/<%=film.id%>" class="btn btn-secondary ml-3">Uredi kategorije</a>
               <form action="/filmovi/crud/<%=film.id%>?_method=DELETE" method="POST" class="d-inline">
                   <button type="submit" class="btn btn-danger ml-3">Obriši</button>
               </form>

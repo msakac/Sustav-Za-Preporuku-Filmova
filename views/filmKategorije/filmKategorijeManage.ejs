@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/navigation.css" type="text/css" />
+    <link rel="stylesheet" href="/css/card.css" type="text/css" />
+    <script src="/javascript/navigation.js"></script>
+    <title>Kategorije</title>
+  </head>
+  <body class="dark">
+    <%- include('../_navigacija') %>
+    
+      <div class="container py-4 w-25">
+        <h1 class="h1 text-center" id="pageHeaderTitle"> <%=film.naziv%></h1>
+        <h5 class="text-center text-danger"><%=errorPoruka%></h5>
+        <div class="container py-4 w-100">
+          <h4 class="text-center">Dodaj kategoriju</h4>
+          <form action ="/film-kategorije/dodaj/<%=film.id%>" method="POST">
+              <select class="form-select form-select-lg mb-3" name="kategorija" id="kategorija" aria-label=".form-select-lg example">
+                  <option value="">Odaberi kategoriju</option>
+                  <% kategorije.forEach(kategorija=> { %>
+                  <option value="<%= kategorija.id %>"><%= kategorija.naziv %></option>
+                  <%})%>
+              </select>
+              <div class="d-flex justify-content-center">
+                  <a href="/filmovi/crud" class="btn btn-secondary">Odustani</a>
+                  <button type="submit" class="btn btn-success ml-3">Spremi</button>
+              </div>
+            </form>
+          </div>
+          <div class="container py-4 w-75">
+          <h4 class="text-center">Kategorije filma</h4>
+        <% kategorijeZaStranicu.forEach(kategorija=> { %>
+            <div class="card mt-3 ">
+                <div class="card-body" style="background-color:#424242 ;">
+                    <h4 class="card-title text-center">
+                        <%= kategorija.naziv %>
+                    </h4>
+                    <form action="/film-kategorije/obrisi/<%=kategorija.id%>/<%=film.id%>?_method=DELETE" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger col-md-12 text-center">Obriši</button>
+                    </form>
+                </div>
+
+            </div>
+        <%})%>
+      </div>
+      </div>
+  </body>
+</html>
