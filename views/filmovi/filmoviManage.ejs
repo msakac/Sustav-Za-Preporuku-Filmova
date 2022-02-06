@@ -26,11 +26,11 @@
         
       <% filmovi.forEach(film=> { %>
         <article class="postcard dark blue">
-          <a class="postcard__img_link" href="#">
+          <a class="postcard__img_link" href="/filmovi/detalji/<%=film.id%>">
             <img class="postcard__img" src=<%= film.slika %> alt="Image Title" />
           </a>
           <div class="postcard__text">
-            <h1 class="postcard__title blue ml-3"><a href="#"><%= film.naziv %></a></h1>
+            <h1 class="postcard__title blue ml-3"><a href="/filmovi/detalji/<%=film.id%>"><%= film.naziv %></a></h1>
             <div class="postcard__subtitle small">
               <time datetime="2020-05-25 12:00:00">
                 <i class="fas fa-calendar-alt mr-3"></i><%= film.datumIzlaska.toLocaleDateString() %>
@@ -44,7 +44,7 @@
               <%})%>
               <li class="tag__item"><i class="fas fa-clock mr-2"></i><%= film.trajanje +" min"%></li>
               <li class="tag__item play blue">
-                <a href="#"><i class="fas fa-play mr-2"></i>Više</a>
+                <a href="/filmovi/detalji/<%=film.id%>"><i class="fas fa-play mr-2"></i>Više</a>
               </li>
             </ul>
             <ul class="postcard__tagbox ml-3">
