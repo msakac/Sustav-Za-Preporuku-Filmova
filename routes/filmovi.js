@@ -1,11 +1,16 @@
 const express = require('express')
 const Film = require('./../models/filmovi')
+const FilmKategorije = require('./../models/filmKategorije')
+const Kategorija = require('./../models/kategorije')
 const router = express.Router()
 
 //Stranica za CRUD filmova
 router.get('/crud', async (req, res) => {
     const filmovi = await Film.find().sort({ datumIzlaska: 'desc' })
-    res.render('filmovi/filmoviManage', { filmovi: filmovi })
+    
+    //filmovima dodam kategorije
+    filmoviZaStranicu = await dohvatiKategorijeZaSvakiFilm(filmovi)
+    res.render('filmovi/filmoviManage', { filmovi: Array.from(filmoviZaStranicu)})
 })
 
 //Stranica za dodavanje filmova
@@ -62,4 +67,27 @@ router.delete('/crud/:id', async (req, res) => {
     await Film.findByIdAndDelete(req.params.id)
     res.redirect('/filmovi/crud')
 })
+
+async function dohvatiKategorijeZaSvakiFilm(filmovi){
+    var filmoviZaStranicu = []
+    for(var i in filmovi){
+        var kategorijeFilma = await FilmKategorije.find({film: filmovi[i].id})
+        var naziviKategorija = await dohvatiKategorije(kategorijeFilma)
+        var idFilma = filmovi[i].id
+        var rFilm = filmovi[i].toObject()
+        rFilm.kategorije = naziviKategorija
+        rFilm.id = idFilma
+        filmoviZaStranicu.push(rFilm)
+    }
+    return filmoviZaStranicu
+}
+
+async function dohvatiKategorije(filmKategorije){
+    var kategorijeZaStranicu = []
+    for(var el in filmKategorije){
+        const kat = await Kategorija.findById(filmKategorije[el].kategorija)
+        kategorijeZaStranicu.push(kat.naziv)
+    }
+    return kategorijeZaStranicu
+}
 module.exports = router
