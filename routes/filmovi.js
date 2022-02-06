@@ -13,6 +13,11 @@ router.get('/crud', async (req, res) => {
     res.render('filmovi/filmoviManage', { filmovi: Array.from(filmoviZaStranicu)})
 })
 
+router.get('/detalji/:id', async(req,res)=>{
+    const film = await Film.findById(req.params.id)
+    res.render('filmovi/filmoviVise', {film: film})
+})
+
 //Stranica za dodavanje filmova
 router.get('/novi', (req, res) => {
     res.render('filmovi/filmoviDodaj', { film: new Film() })
@@ -54,6 +59,7 @@ router.post('/novi', async (req, res) => {
         datumIzlaska: req.body.datum,
         zanr: req.body.zanr,
         reziser: req.body.reziser,
+        trajanje: req.body.trajanje,
         glumci: req.body.glumci,
         slika: req.body.slika,
         najava: req.body.najava
@@ -63,8 +69,10 @@ router.post('/novi', async (req, res) => {
 })
 
 //Brisanje filma
+//Brisem film i brišem sve njegove kategorije
 router.delete('/crud/:id', async (req, res) => {
     await Film.findByIdAndDelete(req.params.id)
+    await FilmKategorije.find({film:req.params.id}).deleteMany()
     res.redirect('/filmovi/crud')
 })
 
