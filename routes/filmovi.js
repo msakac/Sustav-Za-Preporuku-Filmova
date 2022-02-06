@@ -14,8 +14,17 @@ router.get('/crud', async (req, res) => {
 })
 
 router.get('/detalji/:id', async(req,res)=>{
+    var filmZaDetalje = []
+
     const film = await Film.findById(req.params.id)
-    res.render('filmovi/filmoviVise', {film: film})
+
+    var kategorijeFilma = await FilmKategorije.find({film: film.id})
+    var naziviKategorija = await dohvatiKategorije(kategorijeFilma)
+    console.log(naziviKategorija)
+    for(i in naziviKategorija){
+        console.log(naziviKategorija[i])
+    }
+    res.render('filmovi/filmoviVise', {film: film, kategorije: naziviKategorija })
 })
 
 //Stranica za dodavanje filmova
