@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/css/navigation.css" type="text/css" />
     <link rel="stylesheet" href="/css/cardPreview.css" type="text/css" />
     <link rel="stylesheet" href="/css/komentar.css" type="text/css" />
+    <link rel="stylesheet" href="/css/komentarBox.css" type="text/css" />
     <link rel="stylesheet" href="/css/stars.css" type="text/css" />
     <script src="/javascript/navigation.js"></script>
     <script src="/javascript/komentar.js"></script>
@@ -53,12 +54,50 @@
             </ul>
             <ul class="postcard__tagbox ml-3">
               <% kategorije.forEach(kategorija=> { %>
-                <li class="tag__item"><i class="fas fa-tag mr-2"></i><%= kategorija%></li>
+                <li class="tag__item"><%= kategorija%></li>
               <%})%>
             </ul>
           </div>
-          <h1 class="postcard__title blue ml-4">Komentari</h1>
-          <%- include('_ocjeni_form') %>
+          <% if(korisnikKomentiral.length == 0){ %>
+            <h1 class="postcard__title blue ml-4">Komentiraj</h1>
+            <%- include('_ocjeni_form') %>
+            <% } %>
+          <div class="row d-flex justify-content-center mt-100 mb-100">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Najnoviji komentari</h4>
+                    </div>
+                    <div class="comment-widgets">
+                        <!-- Comment Row -->
+                        <% komentari.forEach(kom=> { %>
+                        <div class="d-flex flex-row comment-row m-t-0">
+                            <div class="p-2"><img src="https://media.istockphoto.com/vectors/male-profile-flat-blue-simple-icon-with-long-shadow-vector-id522855255?k=20&m=522855255&s=612x612&w=0&h=fLLvwEbgOmSzk1_jQ0MgDATEVcVOh_kqEe0rqi7aM5A=" alt="user" width="50" class="rounded-circle"></div>
+                            <div class="comment-text w-100">
+                                <h6 style="font-weight: bold;"><%= kom.korisnik%></h6> <span class="m-b-15 d-block"><%= kom.komentar%> </span>
+                                <span class="m-b-15 d-block" style="color:chartreuse">Ocjena: <%= kom.ocjena%>/5 </span>
+                                <div class="comment-footer"> 
+                                  <span class="text-muted float-right">
+                                    <%= kom.datum.toLocaleDateString() %> <%= kom.datum.toLocaleTimeString() %>
+                                  </span>
+                                  <!-- <button type="button" class="btn btn-cyan btn-sm">Edit</button> 
+                                  <button type="button" class="btn btn-success btn-sm">Publish</button>  -->
+                                  <% if(korisnik == kom.korisnik){ %>
+                                    <form action="/filmovi/detalji/obrisi-komentar/<%=kom.id%>/<%=film.id%>?_method=DELETE" method="POST" class="d-inline">
+                                        <button type="submit" class="btn btn-danger btn-sm">Obriši</button>
+                                    </form>
+                                  <% } %>
+                                </div>
+                            </div>
+                        </div>
+                        <%})%> <!-- Comment Row -->
+                    </div> <!-- Card -->
+                </div>
+            </div>
+        </div>
+
+
+
         </article>
     </section>
   </body>

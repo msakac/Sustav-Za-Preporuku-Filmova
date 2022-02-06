@@ -56,7 +56,7 @@ router.post('/login', async(req, res) =>{
         const korisnik = new Korisnik
         if(korisnikPostoji.lozinka == req.body.lozinka){
             //Ako se logira, kreiramo session i spremamo korisnikov ID. Zatim redirect na početnu
-            req.session.result = korisnikPostoji.id
+            req.session.result = korisnikPostoji.korisnickoIme
             res.redirect('/')
         }else{
             res.render('login', {errorPoruka: "Pogrešna lozinka"})
