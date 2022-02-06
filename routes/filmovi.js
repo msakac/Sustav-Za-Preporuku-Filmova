@@ -165,7 +165,7 @@ async function algoritamZaPreporuke(req){
         }
     }
     //ispis ocjena 
-    console.log(listaOcjenaPoKategoriji)
+    //console.log(listaOcjenaPoKategoriji)
 
     //getanje svih kategorija
     const sveKategorije = await Kategorija.find()
@@ -198,19 +198,26 @@ async function algoritamZaPreporuke(req){
     var filmoviZaStranicu = []
     const filmovi = await Film.find()
     for(var i in filmovi){
-        var kategorijeFilma = await FilmKategorije.find({film: filmovi[i].id})
-        var faktorZaFilm = 0
-        for(var j in kategorijeFilma){
-            var kategorijaFilma = kategorijeSaFaktorom.find(i=>i.id == kategorijeFilma[j].kategorija)
-            faktorZaFilm = +faktorZaFilm + +kategorijaFilma.faktor
-        }
-        console.log(filmovi[i].naziv+" Faktor: "+faktorZaFilm)
-        //objektu dodajem atribut faktora i dodajem v novu listu
+
         var idFilma = filmovi[i].id
-        var rFilm = filmovi[i].toObject()
-        rFilm.faktor = faktorZaFilm
-        rFilm.id = idFilma
-        filmoviZaStranicu.push(rFilm)
+        var ocjenjen = ocjeneKorisnika.filter(i=>i.film == idFilma) //trazimo da li je korisnik vec ocjenio film
+        //ako nije ocjenio film onda ulazimo u petlju
+        if(ocjenjen.length === 0){
+            var kategorijeFilma = await FilmKategorije.find({film: filmovi[i].id})
+            var faktorZaFilm = 0
+            for(var j in kategorijeFilma){
+                var kategorijaFilma = kategorijeSaFaktorom.find(i=>i.id == kategorijeFilma[j].kategorija)
+                faktorZaFilm = +faktorZaFilm + +kategorijaFilma.faktor
+            }
+            console.log(filmovi[i].naziv+" Faktor: "+faktorZaFilm)
+            //objektu dodajem atribut faktora i dodajem v novu listu
+            var idFilma = filmovi[i].id
+            var rFilm = filmovi[i].toObject()
+            rFilm.faktor = faktorZaFilm
+            rFilm.id = idFilma
+            filmoviZaStranicu.push(rFilm)
+        }
+
     }
     //sortiranje
     function compare( a, b ) {
