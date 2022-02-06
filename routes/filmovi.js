@@ -48,6 +48,15 @@ router.get('/uredi/:id', async (req, res) => {
     const film = await Film.findById(req.params.id)
     res.render('filmovi/filmoviUredi', { film: film})
 })
+//Stranica za preporuke
+router.get('/preporuceno', async(req,res)=>{
+    if(req.session.result){
+        algoritamZaPreporuke(req)
+        res.render('filmovi/preporuceni')
+    }else{
+        res.redirect('/')
+    }
+})
 //Uredivanje filma
 router.put('/uredi/:id', async (req, res) => {
     await Film.findById(req.params.id)
@@ -134,6 +143,51 @@ async function dohvatiKategorije(filmKategorije){
         kategorijeZaStranicu.push(kat.naziv)
     }
     return kategorijeZaStranicu
+}
+
+async function algoritamZaPreporuke(req){
+    var listaOcjenaPoKategoriji = []
+    //lista ocjena sadrzi id kategorije i ocjenu
+
+    const korisnik = req.session.result //id korisnika
+    const ocjeneKorisnika = await filmOcjene.find({korisnik: korisnik}) //korisnikovi komentari
+
+    //za svaku ocjenu korisnika dodajem element objekt u listaOcjenaPoKategoriji
+    //ako film sadrzi 3 kategorije i dobije ocjenu x, onda svakoj toj kategoriji dam ocjenu x
+    //na kraju dobim listu objekta v kojem je svaka kategorija sa ocjenom
+    for(var i in ocjeneKorisnika){
+        var kategorijeFilma = await FilmKategorije.find({film: ocjeneKorisnika[i].film})
+        for(j in kategorijeFilma){
+            var element = {}
+            element.id = kategorijeFilma[j].kategorija
+            element.ocjena = ocjeneKorisnika[i].ocjena
+            listaOcjenaPoKategoriji.push(element)
+        }
+    }
+    //ispis ocjena 
+    console.log(listaOcjenaPoKategoriji)
+
+    //getanje svih kategorija
+    const sveKategorije = await Kategorija.find()
+
+    //Zbrajanje ocjena svake kategorije i brojanje koliko je ta kategorija dobila ocjeni
+    for(var i in sveKategorije){
+        id = sveKategorije[i].id //id kategorije
+
+        var ocjeneZaKategoriju = listaOcjenaPoKategoriji.filter(i=>i.id == id)//broj ocjena
+        var brojOcjenaZaKategoriju = ocjeneZaKategoriju.length//broj ocjena
+
+        var sumaOcjena = listaOcjenaPoKategoriji.filter(i=>i.id == id).reduce((a,b)=> a + b.ocjena,0);//suma ocjena
+
+        var prosjecnaOcjena = (sumaOcjena/5).toFixed(2)
+        var faktorPreporuke = (prosjecnaOcjena * sumaOcjena).toFixed(2)
+        
+        console.log(sveKategorije[i].naziv)
+        console.log("--------Broj ocjena: "+brojOcjenaZaKategoriju)
+        console.log("--------Suma ocjena: "+sumaOcjena)
+        console.log("--------Prosjecna ocjena: "+prosjecnaOcjena)
+        console.log("--------Faktor preporuke: "+faktorPreporuke)
+    }
 }
 
 module.exports = router
