@@ -2,6 +2,7 @@ const express = require('express')
 const Film = require('./../models/filmovi')
 const FilmKategorije = require('./../models/filmKategorije')
 const Kategorija = require('./../models/kategorije')
+const FilmOcjene = require('./../models/filmOcjene')
 const router = express.Router()
 
 //Stranica za CRUD filmova
@@ -108,4 +109,5 @@ async function dohvatiKategorije(filmKategorije){
     }
     return kategorijeZaStranicu
 }
+
 module.exports = router

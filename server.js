@@ -6,6 +6,7 @@ const Korisnik = require('./models/korisnik')
 const Filmovi = require('./models/filmovi')
 const Kategorije = require('./models/kategorije')
 const FilmKategorije = require('./models/filmKategorije')
+const FilmOcjene = require('./models/filmOcjene')
 
 const korisnikRouter = require('./routes/korisnik')
 const filmoviRouter = require('./routes/filmovi')
