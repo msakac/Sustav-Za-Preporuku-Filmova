@@ -25,16 +25,21 @@ router.get('/:id', async (req, res) => {
 //Ako ima setamo error poruku i redirectamo
 router.post('/dodaj/:id', async(req,res)=>{
     const film = await Film.findById(req.params.id)
-    const vecPostoji = await FilmKategorije.find({kategorija:req.body.kategorija, film:film.id})
-    if(vecPostoji.length != 0){
-        req.session.error = "Film već sadrži tu kategoriju"
+    if(req.body.kategorija == "null"){
+        req.session.error = "Niste odabrali kategoriju"
     }else{
-        const filmKategorija = new FilmKategorije({
-            film: req.params.id,
-            kategorija: req.body.kategorija
-        })
-        await filmKategorija.save()
+        const vecPostoji = await FilmKategorije.find({kategorija:req.body.kategorija, film:film.id})
+        if(vecPostoji.length != 0){
+            req.session.error = "Film već sadrži tu kategoriju"
+        }else{
+            const filmKategorija = new FilmKategorije({
+                film: req.params.id,
+                kategorija: req.body.kategorija
+            })
+            await filmKategorija.save()
+        }
     }
+    
     res.redirect('/film-kategorije/'+req.params.id)
 })
 
