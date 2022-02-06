@@ -1,5 +1,6 @@
 const express = require('express')
 const Kategorija = require('./../models/kategorije')
+const FilmKategorije = require('./../models/filmKategorije')
 const router = express.Router()
 
 //Stranica za CRUD kategorija
@@ -49,6 +50,7 @@ router.put('/uredi/:id', async (req, res) => {
 //Brisanje kategorije
 router.delete('/:id', async (req, res) => {
     await Kategorija.findByIdAndDelete(req.params.id)
+    await FilmKategorije.find({kategorija:req.params.id}).deleteMany()
     res.redirect('/kategorije')
 })
 
