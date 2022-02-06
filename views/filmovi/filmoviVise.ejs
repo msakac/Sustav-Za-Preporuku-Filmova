@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/navigation.css" type="text/css" />
+    <link rel="stylesheet" href="/css/cardPreview.css" type="text/css" />
+    <script src="/javascript/navigation.js"></script>
+    <title>Filmovi</title>
+  </head>
+  <body>
+    <%- include('../_navigacija') %>
+    <section class="dark">
+      <div class="container py-4">
+        <article class="postcard dark blue">
+            <h4 class="text-center" id="pageHeaderTitle"><%= film.naziv %></h4>
+            <img class="postcard__img rounded mx-auto d-block" src=<%= film.slika %> alt="Image Title" />
+          </a>
+          <div class="postcard__text">
+            <h1 class="postcard__title blue ml-4 mb-4"><%= film.naziv %></h1>
+            <div class="postcard__subtitle small mb-5">
+              <time datetime="2020-05-25 12:00:00">
+                <i class="fas fa-calendar-alt mr-4"></i>Početak prikazivanja:  <%= film.datumIzlaska.toLocaleDateString() %>
+              </time>
+              <i class="fas fa-calendar-alt mr-5"></i>Režiser: <%= film.reziser %>
+            </div>
+              <div class="col-sm-8 offset-md-2 embed-responsive embed-responsive-16by9">
+                <%- film.najava %>>
+            </div>
+            <div class="postcard__subtitle small">
+                <br>
+                <i class="fas fa-calendar-alt mr-3" style="color:white"></i>Glumci: <%= film.glumci %>
+              </div>
+            <div class="postcard__bar ml-3"></div>
+            <div class="postcard__preview-txt ml-3"><%=film.opis%></div>
+            <ul class="postcard__tagbox ml-3">
+              <li class="tag__item"><i class="fas fa-clock mr-2"></i><%= film.trajanje +" min"%></li>
+              <li class="tag__item play blue">
+                <a href="#"><i class="fas fa-play mr-2"></i>Više</a>
+              </li>
+            </ul>
+            <ul class="postcard__tagbox ml-3">
+              <a href="/filmovi/uredi/<%=film.id%>" class="btn btn-info">Uredi film</a>
+              <a href="/film-kategorije/<%=film.id%>" class="btn btn-secondary ml-3">Uredi kategorije</a>
+              <form action="/filmovi/crud/<%=film.id%>?_method=DELETE" method="POST" class="d-inline">
+                  <button type="submit" class="btn btn-danger ml-3">Obriši</button>
+              </form>
+            </ul>
+          </div>
+        </article>
+    </div>
+    </section>
+  </body>
+</html>
