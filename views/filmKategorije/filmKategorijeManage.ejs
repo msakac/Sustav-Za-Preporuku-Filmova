@@ -27,7 +27,7 @@
           <h4 class="text-center">Dodaj kategoriju</h4>
           <form action ="/film-kategorije/dodaj/<%=film.id%>" method="POST">
               <select class="form-select form-select-lg mb-3" name="kategorija" id="kategorija" aria-label=".form-select-lg example">
-                  <option value="">Odaberi kategoriju</option>
+                  <option value="null">Odaberi kategoriju</option>
                   <% kategorije.forEach(kategorija=> { %>
                   <option value="<%= kategorija.id %>"><%= kategorija.naziv %></option>
                   <%})%>
