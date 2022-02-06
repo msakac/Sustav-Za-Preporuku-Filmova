@@ -62,6 +62,17 @@ router.put('/uredi/:id', async (req, res) => {
     res.redirect('/filmovi/crud')
 })
 
+router.post('/detalji/komentiraj/:id', async(req, res)=>{
+    const ocjena = new FilmOcjene({
+        film: req.params.id,
+        komentar: req.body.komentar,
+        ocjena: req.body.ocjena,
+        korisnik: req.session.result
+    })
+    await ocjena.save()
+    res.redirect('/filmovi/detalji/'+req.params.id)
+})
+
 //Dodavanje novog filma
 router.post('/novi', async (req, res) => {
     const film = new Film({

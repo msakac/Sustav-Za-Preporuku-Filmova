@@ -5,6 +5,10 @@ const filmOcjeneSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    korisnik:{
+        type: String,
+        require: true
+    },
     ocjena:{
         type: Number,
         required: true,

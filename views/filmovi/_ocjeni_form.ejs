@@ -1,0 +1,40 @@
+<div class="container mb-3">
+	<div class="row" style="margin-top:40px;">
+		<div class="col-md-6">
+    	<div class="well well-sm">
+            <div class="text-right">
+                <a class="btn btn-success btn-green float-left ml-2" href="#reviews-anchor" id="open-review-box">Ocjeni film</a>
+            </div>
+            <div class="row" id="post-review-box" style="display:none;">
+                <div class="col-md-12">
+                    <form accept-charset="UTF-8" action="/filmovi/detalji/komentiraj/<%=film.id%>" method="post">
+                        <textarea class="form-control animated" cols="50" id="komentar" name="komentar" placeholder="Unesi komentar..." rows="2"></textarea>
+                        <div class="text-right">
+                            <div class="container d-flex justify-content-left">
+                                <div class="row">
+                                    <div class="stars">
+                                        <input class="star star-5" id="star-5" type="radio" name="ocjena" value="5"/> 
+                                            <label class="star star-5" for="star-5"></label> 
+                                        <input class="star star-4" id="star-4" type="radio" name="ocjena" value="4"/> 
+                                            <label class="star star-4" for="star-4"></label> 
+                                        <input class="star star-3" id="star-3" type="radio" name="ocjena" value="3"/> 
+                                            <label class="star star-3" for="star-3"></label> 
+                                        <input class="star star-2" id="star-2" type="radio" name="ocjena" value="2"/> 
+                                            <label class="star star-2" for="star-2"></label> 
+                                        <input class="star star-1" id="star-1" type="radio" name="ocjena" value="1"/> 
+                                            <label class="star star-1" for="star-1"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="btn btn-danger float-left" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
+                            <span class="glyphicon glyphicon-remove"></span>Odustani</a>
+                            <button type="submit" class="btn btn-success float-left">Spremi</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> 
+         
+		</div>
+	</div>
+</div>
