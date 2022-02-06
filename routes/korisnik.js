@@ -33,7 +33,8 @@ router.get('/bezvezni',(req, res)=>{
 //Registracija
 router.post('/registracija', async (req, res) => {
     const postojiKorIme = await Korisnik.find({ korisnickoIme: req.body.korisnickoIme })
-    if (postojiKorIme !== null && postojiKorIme !== '') {
+    console.log(postojiKorIme)
+    if (postojiKorIme.length) {
         res.render('registracija', {errorPoruka: "Korisnicko ime vec postoji"})
     } else {
         const korisnik = new Korisnik({
@@ -44,7 +45,7 @@ router.post('/registracija', async (req, res) => {
             lozinka: req.body.lozinka
         })
         await korisnik.save()
-        res.render('login')
+        res.redirect('/korisnik/login')
     }
 })
 
