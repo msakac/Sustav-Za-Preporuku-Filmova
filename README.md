@@ -11,10 +11,10 @@ izvu ́ci  ́cemo faktor preporuke za svaku od kategorije filmova. Ovisno o tome
 film sadrži i koje faktore korisnik ima za svaku pojedinu kategoriju, prikazat  ́ce se preporuˇceni
 filmovi.
 ## Korištene tehnologije
-• MongoDB - polustrukturirana baza podataka
+• MongoDB - polustrukturirana baza podataka  
 • Node.js - programski alat baziran na JavaScript okruženju za razvoj i povezivanje
-baze podataka
-• Express - JavaScript mikrookvir za razvoj podataka u Node.js okolini
-• Mongoose - paket za jednostavniju upotrebu MongoDB u Node.js okolini
+baze podataka  
+• Express - JavaScript mikrookvir za razvoj podataka u Node.js okolini  
+• Mongoose - paket za jednostavniju upotrebu MongoDB u Node.js okolini  
 • Embedded JavaScript - jezik predložaka za generiranje HTML oznaka pomo ́cu Ja-
-vaScripta
+vaScripta  
